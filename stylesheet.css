@@ -1,0 +1,11 @@
+@charset "UTF-8";
+/* CSS Document */
+
+input {
+    float:right;
+    clear:both;
+}
+
+#form-container {
+	width:300px;
+}
