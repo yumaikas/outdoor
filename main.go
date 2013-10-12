@@ -2,31 +2,23 @@ package main
 
 import (
 	"fmt"
+	//"io"
 	"io/ioutil"
 	"net/http"
 	"os"
+	//"encoding/csv"
 )
 
 var (
-	idx []byte
-	css []byte
-)
+	wd string
+	)
 
 func init() {
-	wd, err := os.Getwd()
+	var err error
+	wd, err = os.Getwd()
 	if err != nil {
 		panic("wd failed")
 	}
-	buf, err := ioutil.ReadFile(wd + `/index.html`)
-	if err != nil {
-		panic("Index not found!")
-	}
-	idx = buf
-	b_css, err := ioutil.ReadFile(wd + `/stylesheet.css`)
-	if err != nil {
-		panic("css file not found")
-	}
-	css = b_css
 }
 
 func main() {
@@ -34,19 +26,26 @@ func main() {
 	http.HandleFunc("/submit", acceptPost)
 	http.HandleFunc("/stylesheet.css", getStyle)
 	fmt.Println(http.ListenAndServe(":8080", nil))
-
 }
 
 func getStyle(w http.ResponseWriter, r *http.Request){
 	fmt.Println("css")
 	w.Header().Set("Content-Type", "text/css")
 	w.WriteHeader(200)
+	css, err := ioutil.ReadFile(wd + `/stylesheet.css`)
+	if err != nil {
+		panic("css file not found")
+	}
 	w.Write(css)
 }
 func index(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("index")
 	w.WriteHeader(200)
-	w.Write(idx)
+	buf, err := ioutil.ReadFile(wd + `/index.html`)
+	if err != nil {
+		panic("Index not found!")
+	}
+	w.Write(buf)
 }
 
 func acceptPost(w http.ResponseWriter, r *http.Request) {
@@ -55,6 +54,6 @@ func acceptPost(w http.ResponseWriter, r *http.Request) {
 	phone := r.PostFormValue("GET-phone")
 	email := r.PostFormValue("email")
 	c_email := r.PostFormValue("confirm-email")
-	fmt.Println("form values", name, phone, email, c_email)
+	fmt.Println(name, phone, email, c_email)
 	http.Redirect(w, r, "/", 303)
 }

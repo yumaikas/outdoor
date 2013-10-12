@@ -13,33 +13,41 @@
 				}
 			}
     </script>
-    <link rel="stylesheet" type="text/css" href="stylesheet.css"></link>
-	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"></link>
+    <!-- Optional theme -->
+
+    <link rel="stylesheet" type="text/css" href="stylesheet.css">
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-theme.min.css">
+
 	</head>
-	<body>        
-		<h2>Sign Up for the InterVarsity newsletter</h2>
-		<form action="/submit" method="POST" onsubmit="return compareEmailAddresses()">
+	<body class="main"> 
+	<div class="navbar">       
+		<h2 class="Navbar-header">Sign Up for the Edison InterVarsity newsletter</h2>
+	</div>
+		<form action="/submit" method="POST" onsubmit="return compareEmailAddresses()"
+		role="form">
         	<div id="form-container">
-				<p>
-					<label for="GET-name">Name:</label>
-					<input id="GET-name" name="GET-name" type="text" name="name" class="right"/>
-				</p>
-				<p>
+				<div class="form-group">
+					<label for="GET-name" class="">Name:</label>
+					<input id="GET-name" name="GET-name" type="text" name="name" class="right form-control" placeholder="Full Name"/>
+				</div>
+				<div class="form-group">
 					<label for="GET-phone">Phone:</label>
-					<input id="GET-phone" name="GET-phone" type="text" class="right"/>
-				</p>
-				<p>	
+					<input id="GET-phone" name="GET-phone" type="text" class="right form-control" placeholder="Enter Phone Number"/>
+				</div>
+				<div class="form-group">	
 					<label for="email">Email:</label>
-					<input id="email" name="email" class="right">
-				</p>
-				<p>
+					<input id="email" name="email" class="right form-control"
+					placeholder="Enter Email">
+				</div>
+				
+				<div class="form-group">
 					<label for="confirm-email">Confirm Email:</label>
-					<input id="confirm-email" name="confirm-email" type="text" class="right"/>
-				</p>
-				<p>
-					<span id="wrongSpan" style="visibility:collapse;" class="right error">Your email addresses don't match</span>
-				</p>
-				<input name="submit" type="submit">
+					<input id="confirm-email" name="confirm-email" type="text" class="right form-control"
+					placeholder="Confirm Email"/>
+				</div>
+				<span id="wrongSpan" style="visibility:collapse;" class="btn btn-danger">Your email addresses don't match</span>
+				<button class="btn btn-primary" name="submit" type="submit">Sign up</button>
             </div>
 		</form>
 	</body>
