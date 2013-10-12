@@ -2,45 +2,44 @@
 	<head>
 	<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/knockout/knockout-2.2.1.js"></script>
 	<script>
-        	function compareEmailAddresses()
-			{
+        	function compareEmailAddresses() {
 				var address1 = document.getElementById('email').value;
-				var address2 = document.getElementById('confirm-email').value;
+				var address2 = document.getElementById('confirm-email').value;	
 				
 				var result = address1.localeCompare(address2);
-				
 				if (result !== 0) {
-					address1.style.visibility = "visible";
-					address2.style.visibility = "visible";
+					document.getElementById('wrongSpan').style.visibility = "visible";
+					return false;
 				}
 			}
     </script>
-    <link rel="stylesheet" href="stylesheet.css"></link>
+    <link rel="stylesheet" type="text/css" href="stylesheet.css"></link>
 	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"></link>
 	</head>
-	<body>
-	
-        
+	<body>        
 		<h2>Sign Up for the InterVarsity newsletter</h2>
-		<form action="/submit" method="POST">
+		<form action="/submit" method="POST" onsubmit="return compareEmailAddresses()">
         	<div id="form-container">
 				<p>
 					<label for="GET-name">Name:</label>
-					<input id="GET-name" type="text" name="name"/>
+					<input id="GET-name" type="text" name="name" class="right"/>
 				</p>
 				<p>
 					<label for="GET-phone">Phone:</label>
-					<input id="GET-phone" type="text"/>
+					<input id="GET-phone" type="text" class="right"/>
 				</p>
 				<p>	
 					<label for="email">Email:</label>
-					<input id="email">
+					<input id="email" class="right">
 				</p>
 				<p>
 					<label for="confirm-email">Confirm Email:</label>
-					<input id="confirm-email" type="text"/><span id="wrongSpan" style="visibility:collapse;">Your email addresses don't match</span>
+					<input id="confirm-email" type="text" class="right"/>
 				</p>
-				<input name="submit" type="submit" onClick="compareEmailAddresses()">
+				<p>
+					<span id="wrongSpan" style="visibility:collapse;" class="right error">Your email addresses don't match</span>
+				</p>
+				<input name="submit" type="submit">
             </div>
 		</form>
 	</body>

@@ -1,11 +1,17 @@
 @charset "UTF-8";
 /* CSS Document */
 
-input {
+.error {
+	border-style: solid;
+	border-width: 1px;
+	border-color: #FF0000;
+}
+
+.right {
     float:right;
     clear:both;
 }
 
 #form-container {
-	width:300px;
+	width:320px;
 }
