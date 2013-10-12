@@ -46,10 +46,10 @@ func index(w http.ResponseWriter, r *http.Request) {
 
 func acceptPost(w http.ResponseWriter, r *http.Request) {
 	r.ParseForm()
-	name := r.FormValue("GET-Name")
-	phone := r.FormValue("GET-phone")
-	email := r.FormValue("email")
-	c_email := r.FormValue("confirm-email")
+	name := r.PostFormValue("GET-name")
+	phone := r.PostFormValue("GET-phone")
+	email := r.PostFormValue("email")
+	c_email := r.PostFormValue("confirm-email")
 	fmt.Println("form values", name, phone, email, c_email)
 	http.Redirect(w, r, "/", 303)
 }
