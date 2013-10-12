@@ -14,12 +14,15 @@ var (
 
 func init() {
 	wd, err := os.Getwd()
-	buf, err := ioutil.ReadFile(wd + `\index.html`)
+	if err != nil {
+		panic("wd failed")
+	}
+	buf, err := ioutil.ReadFile(wd + `/index.html`)
 	if err != nil {
 		panic("Index not found!")
 	}
 	idx = buf
-	b_css, err := ioutil.ReadFile(wd + `\stylesheet.css`)
+	b_css, err := ioutil.ReadFile(wd + `/stylesheet.css`)
 	if err != nil {
 		panic("css file not found")
 	}
@@ -30,11 +33,13 @@ func main() {
 	http.HandleFunc("/", index)
 	http.HandleFunc("/submit", acceptPost)
 	http.HandleFunc("/stylesheet.css", getStyle)
-	http.ListenAndServe(":8080", nil)
+	fmt.Println(http.ListenAndServe(":8080", nil))
+
 }
 
 func getStyle(w http.ResponseWriter, r *http.Request){
 	fmt.Println("css")
+	w.Header().Set("Content-Type", "text/css")
 	w.WriteHeader(200)
 	w.Write(css)
 }
