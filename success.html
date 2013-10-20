@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" type="text/css" href="stylesheet.css">
+        <title>
+            Thanks!
+        </title>
+    </head>
+    <body class="main">
+        <div class="navbar">
+            <h2 class="Navbar-header">
+                Sign Up for the Edison InterVarsity Updates
+            </h2>
+        </div>
+        <div class="main">
+            Thank you for signing up. 
+            <p>
+                Returning to signup in <span id="timer">5</span>
+            </p><a class="btn btn-primary" href="/">Next Signup</a>
+        </div>
+        <footer>
+            <script>
+			window.setTimeout(function(){ Tick() }, 1000)
+            var seconds = 5;
+            function Tick() {
+                seconds -= 1;
+                document.getElementById("timer").innerHTML = seconds
+                if (seconds === 0){
+                        document.location.href = "/"
+                }
+                window.setTimeout(function(){ Tick() }, 1000)
+            }
+            </script>
+        </footer>
+    </body>
+</html>

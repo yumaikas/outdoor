@@ -1,54 +1,45 @@
+<!DOCTYPE html>
 <html>
-	<head>
-	<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/knockout/knockout-2.2.1.js"></script>
-	<script>
-        	function compareEmailAddresses() {
-				var address1 = document.getElementById('email').value;
-				var address2 = document.getElementById('confirm-email').value;	
-				
-				var result = address1.localeCompare(address2);
-				if (result !== 0) {
-					document.getElementById('wrongSpan').style.visibility = "visible";
-					return false;
-				}
-			}
-    </script>
-    <!-- Optional theme -->
-
-    <link rel="stylesheet" type="text/css" href="stylesheet.css">
-	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
-	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-theme.min.css">
-
-	</head>
-	<body class="main"> 
-	<div class="navbar">       
-		<h2 class="Navbar-header">Sign Up for the Edison InterVarsity newsletter</h2>
-	</div>
-		<form action="/submit" method="POST" onsubmit="return compareEmailAddresses()"
-		role="form">
-        	<div id="form-container">
-				<div class="form-group">
-					<label for="GET-name" class="">Name:</label>
-					<input id="GET-name" name="GET-name" type="text" name="name" class="right form-control" placeholder="Full Name"/>
-				</div>
-				<div class="form-group">
-					<label for="GET-phone">Phone:</label>
-					<input id="GET-phone" name="GET-phone" type="text" class="right form-control" placeholder="Enter Phone Number"/>
-				</div>
-				<div class="form-group">	
-					<label for="email">Email:</label>
-					<input id="email" name="email" class="right form-control"
-					placeholder="Enter Email">
-				</div>
-				
-				<div class="form-group">
-					<label for="confirm-email">Confirm Email:</label>
-					<input id="confirm-email" name="confirm-email" type="text" class="right form-control"
-					placeholder="Confirm Email"/>
-				</div>
-				<span id="wrongSpan" style="visibility:collapse;" class="btn btn-danger">Your email addresses don't match</span>
-				<button class="btn btn-primary" name="submit" type="submit">Sign up</button>
+    <head>
+        <meta name="generator" content="HTML Tidy for HTML5 (experimental) for Windows https://github.com/w3c/tidy-html5/tree/c63cc39">
+        <script>
+        function compareEmailAddresses() {
+                                var address1 = document.getElementById('email').value;
+                                var address2 = document.getElementById('confirm-email').value;  
+                                
+                                var result = address1.localeCompare(address2);
+                                if (result !== 0) {
+                                        document.getElementById('wrongSpan').style.visibility = "visible";
+                                        return false;
+                                }
+                        }
+        </script><!-- Optional theme -->
+        <link rel="stylesheet" type="text/css" href="stylesheet.css">
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-theme.min.css">
+        <title>Intervarsity</title>
+    </head>
+    <body class="main">
+        <div class="navbar">
+            <h2 class="Navbar-header">
+                Sign Up for the Edison InterVarsity Updates
+            </h2>
+        </div>
+        <form action="/submit" method="post" onsubmit="return compareEmailAddresses()" role="form">
+            <div id="form-container">
+                <div class="form-group">
+                    <label for="name" class="">Name:</label> <input id="name" type="text" name="GET-name" class="right form-control" placeholder="Full Name">
+                </div>
+                <div class="form-group">
+                    <label for="GET-phone">Phone:</label> <input id="GET-phone" name="GET-phone" type="text" class="right form-control" placeholder="Enter Phone Number">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label> <input id="email" name="email" class="right form-control" placeholder="Enter Email">
+                </div>
+                <div class="form-group">
+                    <label for="confirm-email">Confirm Email:</label> <input id="confirm-email" name="confirm-email" type="text" class="right form-control" placeholder="Confirm Email">
+                </div><span id="wrongSpan" style="visibility:collapse;" class="btn btn-danger">Your email addresses don't match</span> <button class="btn btn-primary" name="submit" type="submit">Sign up</button>
             </div>
-		</form>
-	</body>
+        </form>
+    </body>
 </html>
