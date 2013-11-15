@@ -8,6 +8,7 @@ import (
 	"io/ioutil"
 	"net/http"
 	"os"
+	"os/exec"
 )
 
 var (
@@ -23,40 +24,34 @@ func init() {
 }
 
 func main() {
-	//These functions are repetitious and hardcoded, but that saves having to lockdown files.
-	http.HandleFunc("/", index)
+	//Switched from hardcoded duplicate functions to hardcoded strings. Some day these will come from a config file.
+	//The reason that http.Dir is not used is because that allows too easily much messing things up for this app,
+	//which needs to be dirt simple for outside use
+	css := "/stylesheet.css"
+	idx := "/index.html"
+	win := "/success.html"
+
+	http.HandleFunc("/", sendFile(idx, "text/html"))
+	http.HandleFunc(css, sendFile(css, "text/css"))
+	http.HandleFunc(win, sendFile(win, "text/html"))
 	http.HandleFunc("/submit", acceptPost)
-	http.HandleFunc("/stylesheet.css", getStyle)
-	http.HandleFunc("/success.html", success)
+	cmd := exec.Command("cmd", "/c", "start", "http://localhost:8080")
+	buf, _ := cmd.CombinedOutput()
+	fmt.Println(string(buf))
 	fmt.Println(http.ListenAndServe(":8080", nil))
+	//this is just to start a webserver on load
 }
 
-func success(w http.ResponseWriter, r *http.Request) {
-	fmt.Println("success")
-	html, err := ioutil.ReadFile(wd + `/success.html`)
-	if err != nil {
-		panic("success file not found!")
+//type refers to the Content-Type of a web file
+func sendFile(name, c_type string) func(http.ResponseWriter, *http.Request) {
+	return func(w http.ResponseWriter, r *http.Request) {
+		buf, err := ioutil.ReadFile(wd + name)
+		if err != nil {
+			panic(fmt.Sprintf("%s file not found!", name))
+		}
+		w.Header().Set("Content-Type", c_type)
+		w.Write(buf)
 	}
-	w.Header().Set("Content-Type", "text/html")
-	w.Write(html)
-}
-
-func getStyle(w http.ResponseWriter, r *http.Request) {
-	fmt.Println("css")
-	css, err := ioutil.ReadFile(wd + `/stylesheet.css`)
-	if err != nil {
-		panic("css file not found")
-	}
-	w.Header().Set("Content-Type", "text/css")
-	w.Write(css)
-}
-func index(w http.ResponseWriter, r *http.Request) {
-	fmt.Println("index")
-	buf, err := ioutil.ReadFile(wd + `/index.html`)
-	if err != nil {
-		panic("Index not found!")
-	}
-	w.Write(buf)
 }
 
 //TODO: Add extra layer of verification for names, don't rely on JS in browser.
